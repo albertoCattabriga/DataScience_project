@@ -1,0 +1,60 @@
+Accuracy KNN : 0.95
+Confusion Matrix KNN :
+[[55  3]
+ [ 1 21]]
+Classification Report KNN :
+              precision    recall  f1-score   support
+
+           0       0.98      0.95      0.96        58
+           1       0.88      0.95      0.91        22
+
+    accuracy                           0.95        80
+   macro avg       0.93      0.95      0.94        80
+weighted avg       0.95      0.95      0.95        80
+
+--------------------------------------------------------
+Accuracy RandomForest : 0.925
+Confusion Matrix RandomForest :
+[[54  4]
+ [ 2 20]]
+Classification Report RandomForest :
+              precision    recall  f1-score   support
+
+           0       0.96      0.93      0.95        58
+           1       0.83      0.91      0.87        22
+
+    accuracy                           0.93        80
+   macro avg       0.90      0.92      0.91        80
+weighted avg       0.93      0.93      0.93        80
+
+--------------------------------------------------------
+Accuracy LogisticRegression : 0.9125
+Confusion Matrix LogisticRegression :
+[[56  2]
+ [ 5 17]]
+Classification Report LogisticRegression :
+              precision    recall  f1-score   support
+
+           0       0.92      0.97      0.94        58
+           1       0.89      0.77      0.83        22
+
+    accuracy                           0.91        80
+   macro avg       0.91      0.87      0.89        80
+weighted avg       0.91      0.91      0.91        80
+
+--------------------------------------------------------
+Accuracy SVM : 0.95
+Confusion Matrix SVM :
+[[55  3]
+ [ 1 21]]
+Classification Report SVM :
+              precision    recall  f1-score   support
+
+           0       0.98      0.95      0.96        58
+           1       0.88      0.95      0.91        22
+
+    accuracy                           0.95        80
+   macro avg       0.93      0.95      0.94        80
+weighted avg       0.95      0.95      0.95        80
+
+--------------------------------------------------------

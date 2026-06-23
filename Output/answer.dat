@@ -1,0 +1,22 @@
+MODEL : K-Neighbors
+
+F1-SCORE : 0.950648360030511
+RECALL : 0.95
+PRECISION : 0.9526785714285714
+ACCURACY : 0.95
+FIT : OK
+
+PREDICTION : YES
+PROBABILITY : [  0. 100.]
+-----------------------------------------------
+MODEL : Space Vector Machine
+
+F1-SCORE : 0.9259725400457665
+RECALL : 0.925
+PRECISION : 0.9282738095238094
+ACCURACY : 0.925
+FIT : OK
+
+PREDICTION : YES
+PROBABILITY : [ 6. 94.]
+-----------------------------------------------
