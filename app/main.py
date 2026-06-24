@@ -42,7 +42,7 @@ def main():
     else: gender = 1
 
     age = int(input('Digit the age:\t'))
-    salary = int(input('Digit the salary:\t'))
+    salary = float(input('Digit the salary:\t'))
 
     # Remember: Every method return predict, probability, accuracy, confusionMatrix, report and check for overfitting.
     """
