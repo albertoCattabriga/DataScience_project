@@ -1,4 +1,4 @@
-#Data Science - Binary classification
+# Data Science - Binary classification
 
 This project presents a comparative analysis of multiple supervised machine learn-
 ing classification algorithms applied to the “ Social Network Ads” dataset. The
