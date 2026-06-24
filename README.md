@@ -1,3 +1,5 @@
+#Data Science - Binary classification
+
 This project presents a comparative analysis of multiple supervised machine learn-
 ing classification algorithms applied to the “ Social Network Ads” dataset. The
 goal is to predict whether a user is likely to purchase a product based on demo-
