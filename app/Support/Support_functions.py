@@ -31,7 +31,7 @@ def OverfittingControl(train_score, test_score):
 def PerformanceOut(accuracy, confusion_matrix, classification_report,
                    prediction, probability, train_score, test_score, method:str, act:str):
 
-    with open('../Output/results.csv', act, newline='') as csvfile:
+    with open('Output/results.csv', act, newline='') as csvfile:
         field_names = ['Model', 'Accuracy', 'Prediction', 'Probability', 'Training Fit', 'Testing Fit', 'Fitting GAP']
         writer = csv.DictWriter(csvfile, fieldnames=field_names)
         # Columns title.
@@ -48,7 +48,7 @@ def PerformanceOut(accuracy, confusion_matrix, classification_report,
             'Fitting GAP': train_score - test_score
         })
 
-    with open('../Output/output.dat', act) as file:
+    with open('Output/output.dat', act) as file:
         file.write('Accuracy {} : {}\n'.format(method, accuracy))
         file.write('Confusion Matrix {} :\n{}\n'.format(method, confusion_matrix))
         file.write('Classification Report {} :\n{}\n'.format(method, classification_report))
@@ -134,11 +134,11 @@ def SystemAnswer(indices:np.ndarray, accuracy, f1_score, recall, precision, pred
             case 3: model_name = 'Space Vector Machine'
 
         action = 'w' if i == 0 else 'a'
-        with open('../Output/answer.dat', action) as f:
+        with open('Output/answer.dat', action) as f:
             f.write('MODEL : {}\n\n'.format(model_name))
-            f.write('F1-SCORE : {}\nRECALL : {}\nPRECISION : {}\n'.format(f1_score[i], recall[i], precision[i]))
+            f.write('F1-SCORE : {}\nRECALL : {}\nPRECISION : {}\n'.format(f1_score[indices[i]], recall[indices[i]], precision[indices[i]]))
             f.write('ACCURACY : {}\n'.format(accuracy[i]))
-            f.write('FIT : {}\n\n'.format('OVERFITTING' if not check[i] else 'OK'))
-            f.write('PREDICTION : {}\n'.format('YES' if predict[i] == 1 else 'NO'))
-            f.write('PROBABILITY : {}\n'.format(prob[i]))
+            f.write('FIT : {}\n\n'.format('OVERFITTING' if not check[indices[i]] else 'OK'))
+            f.write('PREDICTION : {}\n'.format('YES' if predict[indices[i]] == 1 else 'NO'))
+            f.write('PROBABILITY : {}\n'.format(prob[indices[i]]))
             f.write('-----------------------------------------------\n')
