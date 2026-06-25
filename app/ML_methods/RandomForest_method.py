@@ -16,8 +16,8 @@ def RandomForest_prediction(X_train, X_test, Y_train, Y_test, gender, age:int, s
     # In the random forest method, the data don't need to be scaled.
 
     # Find the best number of estimator and the best max depth.
-    set_par = {'n_estimators' : range(50, 200, 50),
-                     'max_depth' : range(1, 10)}
+    set_par = {'n_estimators' : list(range(50, 250, 50)),
+                     'max_depth' : list(range(1, 10))}
 
     search_par = GridSearchCV(RandomForestClassifier(), set_par, cv=5, n_jobs=-1,
                                scoring='f1_weighted')
