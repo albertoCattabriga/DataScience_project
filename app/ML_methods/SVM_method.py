@@ -1,4 +1,5 @@
 from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from app.Support.Support_functions import *
 
@@ -11,10 +12,21 @@ with the maximum margin.
 def SVM_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:int, salary:float):
     # Scale the data with the method ScaleData().
     X_train_scaled, X_test_scaled = ScaleData(X_train, X_test, scaler)
+
+    # Search the best kernel.
+    set_kernel = {'kernel' : ['rbf', 'linear', 'poly']}
+    search_kernel = GridSearchCV(SVC(probability=True, random_state=0), set_kernel, cv=6, n_jobs=-1, scoring='f1_weighted')
+
+    # Find the best kernel.
+    search_kernel.fit(X_train_scaled, Y_train)
+    best_kernel = search_kernel.best_params_['kernel']
+
+    print('SVM starting with kernel : {}'.format(best_kernel))
+
     # Create the model SVM.
     # kernel='rbf' handles non-linear boundaries (better for this dataset).
     # probability=True allows predict_proba().
-    svm = SVC(kernel='rbf', probability=True, random_state=0)
+    svm = SVC(kernel=best_kernel, probability=True, random_state=0)
 
     # Train the model.
     svm.fit(X_train_scaled, Y_train)

@@ -41,8 +41,8 @@ def main():
     if gender_str.lower() == 'male': gender = 0
     else: gender = 1
 
-    age = int(input('Digit the age:\t'))
-    salary = float(input('Digit the salary:\t'))
+    age = int(input('Digit the age :\t'))
+    salary = float(input('Digit the salary :\t'))
 
     # Remember: Every method return predict, probability, accuracy, confusionMatrix, report and check for overfitting.
     """
