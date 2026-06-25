@@ -14,7 +14,7 @@ def SVM_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:int, sa
     X_train_scaled, X_test_scaled = ScaleData(X_train, X_test, scaler)
 
     # Search the best kernel.
-    set_kernel = {'kernel' : ['rbf', 'linear', 'poly']}
+    set_kernel = {'kernel' : ['rbf', 'linear']}
     search_kernel = GridSearchCV(SVC(random_state=0), set_kernel, cv=6, n_jobs=-1, scoring='f1_weighted')
 
     # Find the best kernel.
