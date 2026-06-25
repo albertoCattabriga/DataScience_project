@@ -50,8 +50,8 @@ def main():
     """
     predict_knn, prob_knn, accuracy_knn, confMatrix_knn, report_knn, overfitting_knn = KNeighbors_prediction(X_train, X_test,
                                                                                             Y_train, Y_test,
-                                                                                            scaler, 5,
-                                                                                            gender, age, salary)
+                                                                                            scaler, gender,
+                                                                                            age, salary)
 
     """
     Prediction with Random Forest.

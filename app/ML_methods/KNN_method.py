@@ -1,4 +1,5 @@
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from app.Support.Support_functions import *
 
@@ -8,11 +9,23 @@ The method takes as input the train and test values, the K value and the value o
 At the end of the method, the process write the result of the prediction with PerformanceOut().
 """
 
-def KNeighbors_prediction(X_train, X_test, Y_train, Y_test, scaler, Neighbors:int, gender, age:int, salary:float):
+def KNeighbors_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:int, salary:float):
     # Scale the data with the method ScaleData().
     X_train_scaled, X_test_scaled = ScaleData(X_train, X_test, scaler)
-    # Create the model KNeighbors.
-    knn = KNeighborsClassifier(n_neighbors=Neighbors)
+
+    # Find the ideal value of neighbors.
+    set_K = {'n_neighbors' : [1, 2, 3, 4, 5, 6, 7, 8, 9],}
+    # Use GridSearchCV for searching the best int values between the set of K.
+    # Put in default the value into the argument n_neighbors of KNeighborsClassifier().
+    search_K = GridSearchCV(KNeighborsClassifier(), set_K, cv=6, n_jobs=-1, scoring='f1_weighted')
+    search_K.fit(X_train_scaled, Y_train)
+
+    # Save the best K.
+    best_K = search_K.best_params_['n_neighbors']
+    print('Starting KNN prediction with K : {}'.format(best_K))
+
+    # Create the model KNeighbors with best K found and choice the way to calculate the distance.
+    knn = KNeighborsClassifier(n_neighbors=best_K, algorithm='brute')
     # Fit the training data.
     knn.fit(X_train_scaled, Y_train)
     # Make the prediction.
