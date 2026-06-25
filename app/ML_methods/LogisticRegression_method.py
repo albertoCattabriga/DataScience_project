@@ -25,7 +25,7 @@ def LogisticRegression_prediction(X_train, X_test, Y_train, Y_test, scaler, gend
     print('Starting Logistic Regression prediction with C : {}'.format(best_C))
 
     # Create the model for the logistic regression with the best C found.
-    logistic_regression = LogisticRegression(C=best_C)
+    logistic_regression = LogisticRegression(C=search_C.best_params_['C'])
     # Fit the scaled data.
     logistic_regression.fit(X_train_scaled, Y_train)
     # Make the prediction on the validation part.
