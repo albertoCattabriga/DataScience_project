@@ -14,7 +14,7 @@ def KNeighbors_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:
     X_train_scaled, X_test_scaled = ScaleData(X_train, X_test, scaler)
 
     # Find the ideal value of neighbors.
-    set_K = {'n_neighbors' : [1, 2, 3, 4, 5, 6, 7, 8, 9],}
+    set_K = {'n_neighbors' : range(1, 10)}
     # Use GridSearchCV for searching the best int values between the set of K.
     # Put in default the value into the argument n_neighbors of KNeighborsClassifier().
     search_K = GridSearchCV(KNeighborsClassifier(), set_K, cv=6, n_jobs=-1, scoring='f1_weighted')

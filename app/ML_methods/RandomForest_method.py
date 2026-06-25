@@ -1,4 +1,5 @@
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import matplotlib.pyplot as plt
 from sklearn.tree import plot_tree
@@ -11,12 +12,25 @@ At the end of the method, the process write the result of the prediction with Pe
 The code shows also the trees used for the Random forest classification with 'matplotlib'.
 """
 
-def RandomForest_prediction(X_train, X_test, Y_train, Y_test, estimator, depth, gender, age:int, salary:float):
+def RandomForest_prediction(X_train, X_test, Y_train, Y_test, gender, age:int, salary:float):
     # In the random forest method, the data don't need to be scaled.
-    # Create directly the model.
+
+    # Find the best number of estimator and the best max depth.
+    set_par = {'n_estimators' : range(50, 300, 50),
+                     'max_depth' : range(1, 10)}
+
+    search_par = GridSearchCV(RandomForestClassifier(), set_par, cv=5, n_jobs=-1,
+                               scoring='f1_weighted')
+
+    ideal_par = search_par.fit(X_train, Y_train)
+    best_estimators = ideal_par.best_params_['n_estimators']
+    best_maxDepth = ideal_par.best_params_['max_depth']
+
+    print('Starting Random Forest : n_estimators = {}, max_depth = {}'.format(best_estimators, best_maxDepth))
+
     # n_estimators: Number of trees for the prediction.
     # max_depth: Maximum level of the trees.
-    random_forest = RandomForestClassifier(n_estimators=estimator, max_depth=depth)
+    random_forest = RandomForestClassifier(n_estimators=best_estimators, max_depth=best_maxDepth)
     # Train the model.
     random_forest.fit(X_train, Y_train)
 

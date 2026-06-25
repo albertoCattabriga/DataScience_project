@@ -58,7 +58,6 @@ def main():
     """
     predict_rf, prob_rf, accuracy_rf, confMatrix_rf, report_rf, overfitting_rf = RandomForest_prediction(X_train, X_test,
                                                                                          Y_train, Y_test,
-                                                                                         100, 8,
                                                                                          gender, age, salary)
 
     """
