@@ -1,4 +1,5 @@
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from app.Support.Support_functions import *
 
@@ -11,8 +12,20 @@ At the end of the method, the process write the result of the prediction with Pe
 def LogisticRegression_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:int, salary:float):
     # Scale the data with the method ScaleData().
     X_train_scaled, X_test_scaled = ScaleData(X_train, X_test, scaler)
-    # Create the model for the logistic regression.
-    logistic_regression = LogisticRegression()
+
+    # Try different C.
+    set_C ={'C' : [0.1, 0.5, 1.0, 2.0, 10.0, 100.0]}
+    # cv=6 test each parameter 6 times on different combinations of training values.
+    # n_jobs=-1 takes all the core available.
+    search_C = GridSearchCV(LogisticRegression(), set_C, cv=6, n_jobs=-1, scoring='f1_weighted')
+    search_C.fit(X_train_scaled, Y_train)
+
+    # Take the best C.
+    best_C = search_C.best_params_['C']
+    print('Starting Logistic Regression prediction with C : {}'.format(best_C))
+
+    # Create the model for the logistic regression with the best C found.
+    logistic_regression = LogisticRegression(C=best_C)
     # Fit the scaled data.
     logistic_regression.fit(X_train_scaled, Y_train)
     # Make the prediction on the validation part.

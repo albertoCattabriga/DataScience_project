@@ -28,19 +28,19 @@ Classification Report RandomForest :
 weighted avg       0.94      0.94      0.94        80
 
 --------------------------------------------------------
-Accuracy LogisticRegression : 0.9125
+Accuracy LogisticRegression : 0.925
 Confusion Matrix LogisticRegression :
 [[56  2]
- [ 5 17]]
+ [ 4 18]]
 Classification Report LogisticRegression :
               precision    recall  f1-score   support
 
-           0       0.92      0.97      0.94        58
-           1       0.89      0.77      0.83        22
+           0       0.93      0.97      0.95        58
+           1       0.90      0.82      0.86        22
 
-    accuracy                           0.91        80
-   macro avg       0.91      0.87      0.89        80
-weighted avg       0.91      0.91      0.91        80
+    accuracy                           0.93        80
+   macro avg       0.92      0.89      0.90        80
+weighted avg       0.92      0.93      0.92        80
 
 --------------------------------------------------------
 Accuracy SVM : 0.95
