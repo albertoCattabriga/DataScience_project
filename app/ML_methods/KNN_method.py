@@ -17,7 +17,8 @@ def KNeighbors_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:
     set_K = {'n_neighbors' : list(range(1, 10))}
     # Use GridSearchCV for searching the best int values between the set of K.
     # Put in default the value into the argument n_neighbors of KNeighborsClassifier().
-    search_K = GridSearchCV(KNeighborsClassifier(), set_K, cv=6, n_jobs=-1, scoring='f1_weighted')
+    # cv=6 makes a K-fold validation with K = 6.
+    search_K = GridSearchCV(KNeighborsClassifier(algorithm='brute'), set_K, cv=6, n_jobs=-1, scoring='f1_weighted')
     search_K.fit(X_train_scaled, Y_train)
 
     # Save the best K.
