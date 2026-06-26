@@ -21,7 +21,7 @@ def SVM_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:int, sa
     search_kernel.fit(X_train_scaled, Y_train)
     best_kernel = search_kernel.best_params_['kernel']
 
-    print('SVM starting with kernel : {}'.format(best_kernel))
+    print('SVM starting with kernel : {} ...'.format(best_kernel))
 
     # Create the model SVM.
     # kernel='rbf' handles non-linear boundaries (better for this dataset).

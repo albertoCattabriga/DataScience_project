@@ -15,10 +15,8 @@ results and see what methods is the best and why.
 """
 
 def main():
-    # Read the file .csv
-    df_raw = pd.read_csv('Social_Network_Ads.csv')
-    # Discard the column of User ID.
-    df = df_raw.drop(['User ID'], axis=1)
+    # Read the file .csv and discard the 'User ID' column.
+    df = pd.read_csv('Social_Network_Ads.csv').drop(['User ID'], axis=1)
     # The 'gender' should be mapped because it needs numeric value.
     df['Gender'] = df['Gender'].map({'Male': 0, 'Female': 1})
 

@@ -18,7 +18,7 @@ ACCURACY : 0.95
 FIT : OK
 
 PREDICTION : YES
-PROBABILITY : [25.0604622 74.9395378]
+PROBABILITY : [28.57873482 71.42126518]
 -----------------------------------------------
 MODEL : Space Vector Machine
 
@@ -29,5 +29,5 @@ ACCURACY : 0.925
 FIT : OK
 
 PREDICTION : YES
-PROBABILITY : [40.00895794 59.99104206]
+PROBABILITY : [10.58227027 89.41772973]
 -----------------------------------------------

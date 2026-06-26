@@ -22,7 +22,7 @@ def KNeighbors_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:
 
     # Save the best K.
     best_K = search_K.best_params_['n_neighbors']
-    print('Starting KNN prediction with K : {}'.format(best_K))
+    print('Starting KNN prediction with K : {} ...'.format(best_K))
 
     # Create the model KNeighbors with best K found.
     # # algorithm=brute means that it calculates all the distances between points.
