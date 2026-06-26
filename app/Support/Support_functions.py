@@ -85,12 +85,13 @@ def CompareParameters(f1_scores: np.ndarray, recalls: np.ndarray, precisions: np
     if len(indices) == 0: indices = np.arange(len(f1_scores))
 
     # If only one model remains, return it
-    if len(indices) == 1: return indices
+    elif len(indices) == 1: return indices
 
     # Step 1: F1-score (maximize)
-    f1_sub = f1_scores[indices]
-    best_f1 = np.where(f1_sub == np.max(f1_sub))[0]
-    indices = indices[best_f1]
+    f1_sub = f1_scores[indices] # Take only the 'indices' position.
+    best_f1 = np.where(f1_sub == np.max(f1_sub))[0] # Return an array of indices.
+    # The next passage is useful for avoiding the indices mismatch.
+    indices = indices[best_f1] # Update on 'indices' the elements at the positions in 'best_f1'.
 
     if len(indices) == 1: return indices
 
