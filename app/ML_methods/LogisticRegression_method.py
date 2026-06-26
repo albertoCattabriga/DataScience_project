@@ -22,7 +22,7 @@ def LogisticRegression_prediction(X_train, X_test, Y_train, Y_test, scaler, gend
 
     # Take the best C.
     best_C = search_C.best_params_['C']
-    print('Starting Logistic Regression prediction with C : {} ...'.format(best_C))
+    print(f'Starting Logistic Regression prediction with C : {best_C} ...')
 
     # Create the model for the logistic regression with the best C found.
     logistic_regression = LogisticRegression(C=best_C)

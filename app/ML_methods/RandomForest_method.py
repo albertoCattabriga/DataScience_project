@@ -26,8 +26,7 @@ def RandomForest_prediction(X_train, X_test, Y_train, Y_test, gender, age:int, s
     best_estimators = ideal_par.best_params_['n_estimators']
     best_maxDepth = ideal_par.best_params_['max_depth']
 
-    print('Starting Random Forest : n_estimators = {}, max_depth = {} ...'.format(best_estimators,
-                                                                              best_maxDepth))
+    print(f'Starting Random Forest : n_estimators = {best_estimators}, max_depth = {best_maxDepth} ...')
 
     # n_estimators: Number of trees for the prediction.
     # max_depth: Maximum level of the trees.
