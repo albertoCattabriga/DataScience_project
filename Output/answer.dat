@@ -7,7 +7,7 @@ ACCURACY : 0.95
 FIT : OK
 
 PREDICTION : YES
-PROBABILITY : [16.66666667 83.33333333]
+PROBABILITY : [  0. 100.]
 -----------------------------------------------
 MODEL : Random Forest
 
@@ -18,7 +18,7 @@ ACCURACY : 0.95
 FIT : OK
 
 PREDICTION : YES
-PROBABILITY : [ 8.53008769 91.46991231]
+PROBABILITY : [14.67909618 85.32090382]
 -----------------------------------------------
 MODEL : Space Vector Machine
 
@@ -29,5 +29,5 @@ ACCURACY : 0.925
 FIT : OK
 
 PREDICTION : YES
-PROBABILITY : [37.63480199 62.36519801]
+PROBABILITY : [32.83771413 67.16228587]
 -----------------------------------------------

@@ -33,13 +33,13 @@ def main():
 
     # Now everything is ready for make prediction by using all the methods.
     # Save the data of the external case.
-    gender = int()
-    gender_str = input('Write the gender :\t')
-    if gender_str.lower() != 'male' and gender_str.lower() != 'female':
-        print('ERROR : Gender not admissible!')
-        exit()
-    if gender_str.lower() == 'male': gender = 0
-    else: gender = 1
+    gender, gender_str = int(), ''
+    while gender_str.lower() != 'male' and gender_str.lower() != 'female':
+        gender_str = input('Write the gender :\t')
+        # Control the value of the string 'gender_str'.
+        if gender_str.lower() == 'male': gender = 0
+        elif gender_str.lower() == 'female': gender = 1
+        else : print('Please enter a valid gender (Male / Female).')
 
     age = int(input('Digit the age :\t'))
     salary = float(input('Digit the salary :\t'))
