@@ -17,9 +17,9 @@ def RandomForest_prediction(X_train, X_test, Y_train, Y_test, gender, age:int, s
 
     # Find the best number of estimator and the best max depth.
     set_par = {'n_estimators' : list(range(50, 250, 50)),
-                  'max_depth' : list(range(1, 10))}
+                  'max_depth' : list(range(1, 10)),}
 
-    search_par = GridSearchCV(RandomForestClassifier(), set_par, cv=5, n_jobs=-1,
+    search_par = GridSearchCV(RandomForestClassifier(criterion='gini'), set_par, cv=5, n_jobs=-1,
                                scoring='f1_weighted')
 
     ideal_par = search_par.fit(X_train, Y_train)
@@ -30,7 +30,9 @@ def RandomForest_prediction(X_train, X_test, Y_train, Y_test, gender, age:int, s
 
     # n_estimators: Number of trees for the prediction.
     # max_depth: Maximum level of the trees.
-    random_forest = RandomForestClassifier(n_estimators=best_estimators, max_depth=best_maxDepth)
+    random_forest = RandomForestClassifier(n_estimators=best_estimators,
+                                           max_depth=best_maxDepth,
+                                           criterion='gini')
     # Train the model.
     random_forest.fit(X_train, Y_train)
 
