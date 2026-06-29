@@ -1,10 +1,13 @@
+import matplotlib.pyplot as plt
+from matplotlib.pyplot import axes
+
 from app.Support.Support_functions import *
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from ML_methods.KNN_method import KNeighbors_prediction
 from ML_methods.RandomForest_method import RandomForest_prediction
 from ML_methods.LogisticRegression_method import LogisticRegression_prediction
-from ML_methods.SVM_method import  SVM_prediction
+from ML_methods.SVM_method import SVM_prediction
 
 """
 This is the main.py file of the structure.
@@ -16,7 +19,31 @@ results and see what methods is the best and why.
 
 def main():
     # Read the file .csv and discard the 'User ID' column.
-    df = pd.read_csv('Social_Network_Ads.csv').drop(['User ID'], axis=1)
+    print('Reading the data-set ...')
+    df_raw = pd.read_csv('Social_Network_Ads.csv')
+
+    # Filter on class 'Purchased' = 1.
+    df_purchased = df_raw[df_raw['Purchased'] == 1]
+
+    # Calculate the means.
+    age_mean = df_purchased['Age'].mean()
+    salary_mean = df_purchased['EstimatedSalary'].mean()
+    # Use matplotlib for representing the class 'Purchased' for age and salary.
+    plt.bar(df_purchased.index + 1, df_purchased['Age'], color='blue')
+    plt.axhline(y=age_mean, color='red', linestyle=':')
+    plt.title(f'Users AGE - Mean value : {int(age_mean)}')
+    plt.xlabel('User ID')
+    plt.ylabel('Age')
+    plt.show()
+    plt.bar(df_purchased.index + 1, df_purchased['EstimatedSalary'], color='magenta')
+    plt.axhline(y=salary_mean, color='blue', linestyle=':')
+    plt.title(f'Users ESTIMATED SALARY - Mean value : {int(salary_mean)}')
+    plt.xlabel('User ID')
+    plt.ylabel('Estimated salary')
+    plt.show()
+
+    # Prepare the dataset for the classification.
+    df = df_raw.drop(['User ID'], axis=1)
     # The 'gender' should be mapped because it needs numeric value.
     df['Gender'] = df['Gender'].map({'Male': 0, 'Female': 1})
 
