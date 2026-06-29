@@ -7,6 +7,8 @@ This file contains support functions for the machine learning methods.
 The function OverfittingControl() controls if there is an overfitting situation.
 The function ScaleData() is used in the methods that require a data scaling.
 The function PerformanceOut() write on 2 output files the results of the process.
+The function CompareParameters() is used for finding the best model.
+The function SystemAnswer() gives to the user the prediction accordingly to the best model(s).
 """
 
 
