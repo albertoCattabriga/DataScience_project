@@ -2,12 +2,74 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from app.Support.Support_functions import *
+import matplotlib.pyplot as mplt
+import numpy as np
 
 """
 In this file we use the KNeighbors method for make a prediction.
 The method takes as input the train and test values, the K value and the value of an external point.
 At the end of the method, the process write the result of the prediction with PerformanceOut().
 """
+
+def _plot_knn_3d(X_train_scaled, Y_train, df_scaled, predict, knn, k):
+    """
+    Visualize the K-neighbors of the query point.
+    """
+    # Converts in Numpy array.
+    X_arr = np.array(X_train_scaled)
+    Y_arr = np.array(Y_train)
+    # Extract the query point as 1D np.array().
+    q = np.array(df_scaled)[0]
+
+    # Find distances, indices and the K-neighbors to query point.
+    distances, indices = knn.kneighbors(df_scaled)
+    # Extract the coordinates of the k-neighbors.
+    neighbor_coords = X_arr[indices[0]]  # shape: (k, 3)
+
+    # Separate the two class, bool array.
+    # Map which has 0 or 1.
+    mask_0 = (Y_arr == 0)  # Not purchased
+    mask_1 = (Y_arr == 1)  # Purchased
+    # Label for the query point.
+    label = 'Purchased' if predict == 1 else 'Not purchased'
+
+    # Create 3D figure.
+    figure = mplt.figure(figsize=(10, 7))
+    ax = figure.add_subplot(111, projection='3d')
+
+    # Scatter of 'NOT PURCHASED' points in red.
+    # 0 -> gender, 1 -> age, 2-> EstimatedSalary.
+    # In a 3D plot, scatter attends 3 coordinates.
+    ax.scatter(X_arr[mask_0, 0], X_arr[mask_0, 1], X_arr[mask_0, 2],
+               c='red', s=15, alpha=0.5, label='Not purchased')
+
+    # Scatter of 'PURCHASED' points.
+    ax.scatter(X_arr[mask_1, 0], X_arr[mask_1, 1], X_arr[mask_1, 2],
+               c='green', s=15, alpha=0.5, label='Purchased')
+
+    # Scatter query point (star shape).
+    # * unpacked the value of the array 'q'.
+    ax.scatter(*q, c='blue', s=120, marker='*', zorder=5,
+               edgecolors='black', linewidths=1, label=f'Query point ({label})')
+
+    # Red segments that links the query point with the neighbors.
+    for i, nb in enumerate(neighbor_coords):
+        ax.plot([q[0], nb[0]], [q[1], nb[1]], [q[2], nb[2]],
+                color='black', linewidth=1.5, linestyle='--',
+                # Add labels.
+                label='K-nearest links' if i == 0 else None)
+
+    # Axis labels.
+    ax.set_xlabel('Gender (scaled)')
+    ax.set_ylabel('Age (scaled)')
+    ax.set_zlabel('Salary (scaled)')
+    ax.set_title(f'KNN 3D — K={k} | Prediction class: {label}')
+    ax.legend(loc='upper left')
+
+    # Adjust automatically the spacing.
+    mplt.tight_layout()
+    mplt.show()
+
 
 def KNeighbors_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:int, salary:float):
     # Scale the data with the method ScaleData().
@@ -58,6 +120,9 @@ def KNeighbors_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:
     check_overfitting = OverfittingControl(train_score, test_score)
 
     print('KNN completed!')
+
+    # Data visualization.
+    _plot_knn_3d(X_train_scaled, Y_train, df_scaled, predict[0], knn, best_K)
 
     return predict[0], probability[0], accuracy, confusionMatrix, report, check_overfitting
 

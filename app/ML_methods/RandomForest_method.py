@@ -14,7 +14,6 @@ The code shows also the trees used for the Random forest classification with 'ma
 
 def RandomForest_prediction(X_train, X_test, Y_train, Y_test, gender, age:int, salary:float):
     # In the random forest method, the data don't need to be scaled.
-
     # Find the best number of estimator and the best max depth.
     set_par = {'n_estimators' : list(range(50, 250, 50)),
                   'max_depth' : list(range(1, 10)),}
