@@ -122,7 +122,10 @@ def KNeighbors_prediction(X_train, X_test, Y_train, Y_test, scaler, gender, age:
     print('KNN completed!')
 
     # Data visualization.
-    _plot_knn_3d(X_train_scaled, Y_train, df_scaled, predict[0], knn, best_K)
+    try:
+        _plot_knn_3d(X_train_scaled, Y_train, df_scaled, predict[0], knn, best_K)
+    except Exception as e:
+        print(f'ERROR : Impossible to reproduce the KNN graph, cause : {e}')
 
     return predict[0], probability[0], accuracy, confusionMatrix, report, check_overfitting
 

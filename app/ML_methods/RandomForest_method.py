@@ -68,17 +68,25 @@ def RandomForest_prediction(X_train, X_test, Y_train, Y_test, gender, age:int, s
     """
 
     # Ask the user if and how many trees he wants to see.
-    n_of_trees = int(input('How many trees would you like to see?\t'))
-    if n_of_trees > 0:
-        fig, axes = plt.subplots(nrows=1, ncols=n_of_trees, figsize=(30, 10))
-        for i in range(n_of_trees):
-            plot_tree(random_forest.estimators_[i],
-                      feature_names=['Gender', 'Age', 'EstimatedSalary'],
-                      class_names=['Not Purchased', 'Purchased'],
-                      filled=True,
-                      ax=axes[i], )
-            axes[i].set_title(f'Tree {i + 1}')
+    n_of_trees = best_estimators + 1
+    while n_of_trees > best_estimators or n_of_trees < 0:
+        n_of_trees = int(input('How many trees would you like to see?\t'))
+        if n_of_trees < 0 or n_of_trees > best_estimators: print(f'Number of trees out of range: [0, {best_estimators}].')
 
-        plt.show()
+    if n_of_trees > 0:
+        try:
+            fig, axes = plt.subplots(nrows=1, ncols=n_of_trees, figsize=(30, 10))
+            for i in range(n_of_trees):
+                plot_tree(random_forest.estimators_[i],
+                          feature_names=['Gender', 'Age', 'EstimatedSalary'],
+                          class_names=['Not Purchased', 'Purchased'],
+                          filled=True,
+                          ax=axes[i], )
+                axes[i].set_title(f'Tree {i + 1}')
+
+            plt.show()
+
+        except Exception as e:
+            print(f'ERROR : Impossible to draw estimator, cause : {e}')
 
     return predict[0], probability[0], accuracy, confusionMatrix, report, check_overfitting

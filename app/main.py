@@ -39,7 +39,11 @@ def main():
         elif gender_str.lower() == 'female': gender = 1
         else : print('Please enter a valid gender (Male / Female).')
 
-    age = int(input('Digit the age :\t'))
+    age = -1
+    while age < 0 or age > 150:
+        age = int(input('Write the age :\t'))
+        if age < 0 or age > 150: print('Age out of range (1; 150)')
+
     salary = float(input('Digit the salary :\t'))
 
     # Remember: Every method return predict, probability, accuracy, confusionMatrix, report and check for overfitting.
