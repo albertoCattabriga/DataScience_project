@@ -38,6 +38,11 @@ def LogisticRegression_prediction(X_train, X_test, Y_train, Y_test, scaler, gend
     train_score = logistic_regression.score(X_train_scaled, Y_train)
     test_score = logistic_regression.score(X_test_scaled, Y_test)
 
+    # Print the beta coefficients
+    print('------ Beta coefficients ------')
+    for i in range(4):
+        print(f'Beta {i} : {logistic_regression.coef_[i]}')
+
     # Make the prediction of an external point.
     point_array = pd.DataFrame([[int(gender), int(age), float(salary)]],
                                columns=['Gender', 'Age', 'EstimatedSalary'],)
