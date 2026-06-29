@@ -25,22 +25,27 @@ def main():
     # Filter on class 'Purchased' = 1.
     df_purchased = df_raw[df_raw['Purchased'] == 1]
 
-    # Calculate the means.
-    age_mean = df_purchased['Age'].mean()
-    salary_mean = df_purchased['EstimatedSalary'].mean()
-    # Use matplotlib for representing the class 'Purchased' for age and salary.
-    plt.bar(df_purchased.index + 1, df_purchased['Age'], color='blue')
-    plt.axhline(y=age_mean, color='red', linestyle=':')
-    plt.title(f'Users AGE - Mean value : {int(age_mean)}')
-    plt.xlabel('User ID')
-    plt.ylabel('Age')
-    plt.show()
-    plt.bar(df_purchased.index + 1, df_purchased['EstimatedSalary'], color='magenta')
-    plt.axhline(y=salary_mean, color='blue', linestyle=':')
-    plt.title(f'Users ESTIMATED SALARY - Mean value : {int(salary_mean)}')
-    plt.xlabel('User ID')
-    plt.ylabel('Estimated salary')
-    plt.show()
+    # DRAW GRAPHS.
+    try:
+        # Calculate the means.
+        age_mean = df_purchased['Age'].mean()
+        salary_mean = df_purchased['EstimatedSalary'].mean()
+        # Use matplotlib for representing the class 'Purchased' for age and salary.
+        plt.bar(df_purchased.index + 1, df_purchased['Age'], color='blue')
+        plt.axhline(y=age_mean, color='red', linestyle=':')
+        plt.title(f'Users AGE - Mean value : {int(age_mean)}')
+        plt.xlabel('User ID')
+        plt.ylabel('Age')
+        plt.show()
+        plt.bar(df_purchased.index + 1, df_purchased['EstimatedSalary'], color='magenta')
+        plt.axhline(y=salary_mean, color='blue', linestyle=':')
+        plt.title(f'Users ESTIMATED SALARY - Mean value : {int(salary_mean)}')
+        plt.xlabel('User ID')
+        plt.ylabel('Estimated salary')
+        plt.show()
+
+    except Exception as e:
+        print(f'Impossible to represent graphs, cause : {e}')
 
     # Prepare the dataset for the classification.
     df = df_raw.drop(['User ID'], axis=1)
